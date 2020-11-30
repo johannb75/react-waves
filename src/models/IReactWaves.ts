@@ -1,56 +1,25 @@
-import { CSSProperties } from 'react';
+import React from "react";
+import { WaveSurferParams } from "wavesurfer.js";
 
-export interface IReactWaves {
-  style?: CSSProperties;
-  className?: string;
-  playing?: boolean;
-  pos?: number;
-  audioFile?: (props: object, propName: string, componentName: string) => void;
-  mediaElt?: string | HTMLElement;
-  audioPeaks?: number[];
-  volume?: number;
-  zoom?: number;
-  onPosChange?: () => void;
-  options?: {
-    audioRate?: number;
-    audioContext?: object;
-    audioScriptProcessor?: object;
-    autoCenter?: boolean;
-    backend?: "WebAudio" | "MediaElement" | "MediaElementWebAudio";
-    barGap?: number;
-    barHeight?: number;
-    barRadius?: number;
-    barWidth?: (
-      props: object,
-      propName: string,
-      componentName: string
-    ) => void;
-    closeAudioContext?: boolean;
-    cursorColor?: string;
-    cursorWidth?: number;
-    fillParent?: boolean;
-    forceDecode?: boolean;
-    height?: number;
-    hideScrollbar?: boolean;
-    interact?: boolean;
-    loopSelection?: boolean;
-    maxCanvasWidth?: number;
-    mediaControls?: boolean;
-    mediaType?: "audio" | "video";
-    minPxPerSec?: number;
-    normalize?: boolean;
-    partialRender?: boolean;
-    pixelRatio?: number;
-    progressColor?: string;
-    removeMediaElementOnDestroy?: boolean;
-    renderer?: object;
-    responsive?: boolean;
-    scrollParent?: boolean;
-    skipLength?: number;
-    splitChannels?: boolean;
-    waveColor?: string | CanvasGradient;
-    xhr?: object;
-  };
-  spectrogramOptions?: object;
-  timelineOptions?: object;
+export interface AudioPropsOnReady {
+	wavesurfer: WaveSurfer;
+	originalArgs: number[];
+}
+
+export interface AudioProps {
+	style?: React.CSSProperties;
+	className?: string;
+	playing?: boolean;
+	pos?: number;
+	audioFile?: string;
+	mediaElt?: string | HTMLElement;
+	audioPeaks?: number[];
+	volume?: number;
+	zoom?: number;
+	onReady?: (ev: AudioPropsOnReady) => void;
+	onPosChange?: (current_time: number, wavesurfer: WaveSurfer) => void;
+	onFinish?: (ev: AudioPropsOnReady) => void;
+	options?: WaveSurferParams;
+	spectrogramOptions?: object;
+	timelineOptions?: object;
 }
